@@ -16,16 +16,18 @@ before_install:
 script:
   - if [ $TRAVIS_OS_NAME == linux ]; then ./build.sh; fi
 
+env:
+  - HK_EXT=https://raw.githubusercontent.com/DiscordHooks/
+
 after_success:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - wget $HK_EXT/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
   - ./send.sh success $WEBHOOK_URL
 after_failure:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - wget $HK_EXT/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
   - ./send.sh failure $WEBHOOK_URL
 
 branches:
   only:
-  - main
-  - "/^v\\d+\\./"
+    - master
