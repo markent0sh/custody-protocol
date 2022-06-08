@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package NodesAPI.Publisher;
+
+message JSON {
+  string payload = 1;
+}
+
+service PublisherNode {
+  rpc sendJSON(JSON) returns(JSON) {}
+}
